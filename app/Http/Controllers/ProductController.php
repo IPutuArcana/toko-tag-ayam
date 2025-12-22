@@ -88,7 +88,7 @@ class ProductController extends Controller
             'materials' => 'required|array',
             'materials.*.id' => 'required|exists:materials,id',
             'materials.*.quantity' => 'required|numeric|min:0.01',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
         ]);
 
         $data = $request->except(['_token', '_method', 'materials', 'image']);

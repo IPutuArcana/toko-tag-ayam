@@ -54,7 +54,6 @@
                             </div>
 
                             <div class="md:col-span-2">
-                                </div>
 
                                 <div class="md:col-span-2">
                                     <label for="image" class="block font-medium text-sm text-gray-700">Upload Gambar Baru (Opsional)</label>
