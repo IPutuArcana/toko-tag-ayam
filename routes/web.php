@@ -33,7 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create'); // Halaman Kasir
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store'); // Simpan Pesanan
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show'); // Detail Pesanan
-    Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus'])w->name('orders.updateStatus');
+    Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
     Route::patch('/orders/{order}/pay', [OrderController::class, 'markAsPaid'])->name('orders.pay'); // Tandai Lunas
 });
 
