@@ -62,6 +62,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/finance', [TransactionController::class, 'index'])->name('finance.index');
     Route::post('/finance/expense', [TransactionController::class, 'storeExpense'])->name('finance.store');
+    Route::get('/finance/export', [TransactionController::class, 'exportExcel'])->name('finance.export');
 });
 
 

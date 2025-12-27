@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MonthlyFinanceExport;
 
 class TransactionController extends Controller
 {
@@ -39,5 +41,16 @@ class TransactionController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Pengeluaran berhasil dicatat!');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        // Default to current month/year if not provided
+        $month = $request->input('month', date('m'));
+        $year  = $request->input('year', date('Y'));
+
+        $filename = 'Laporan_Keuangan_' . $year . '_' . $month . '.xlsx';
+
+        return Excel::download(new MonthlyFinanceExport($month, $year), $filename);
     }
 }

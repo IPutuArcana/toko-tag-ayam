@@ -26,10 +26,49 @@
                     </div>
                 </div>
             </div>
+            
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 <div class="md:col-span-1">
+
+                    <div class="md:col-span-1 space-y-6">
+                        
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 border-t-4 border-green-600">
+                            <h3 class="text-lg font-medium text-gray-900 mb-4">Download Laporan</h3>
+                            <form action="{{ route('finance.export') }}" method="GET">
+                                <div class="grid grid-cols-2 gap-2 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Bulan</label>
+                                        <select name="month" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                            @for($m=1; $m<=12; $m++)
+                                                <option value="{{ $m }}" {{ date('n') == $m ? 'selected' : '' }}>
+                                                    {{ date('F', mktime(0, 0, 0, $m, 1)) }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Tahun</label>
+                                        <select name="year" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                            @for($y=date('Y'); $y>=date('Y')-2; $y--)
+                                                <option value="{{ $y }}">{{ $y }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex justify-center items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    Export Excel
+                                </button>
+                            </form>
+                        </div>
+                        
+                    </div>
+
+
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                         <h3 class="text-lg font-medium text-gray-900 mb-4">Catat Pengeluaran</h3>
                         
