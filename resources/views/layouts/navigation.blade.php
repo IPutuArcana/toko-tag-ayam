@@ -34,6 +34,9 @@
                         <x-nav-link :href="route('production.index')" :active="request()->routeIs('production.index')">
                             {{ __('Produksi') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('finance.index')" :active="request()->routeIs('finance.index')">
+                            {{ __('Laporan Keuangan') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                             {{ __('Users') }}
                         </x-nav-link>
@@ -109,9 +112,13 @@
                 <x-responsive-nav-link :href="route('production.index')" :active="request()->routeIs('production.index')">
                     {{ __('Produksi') }}
                 </x-responsive-nav-link>
+                <x-nav-link :href="route('finance.index')" :active="request()->routeIs('finance.index')">
+                    {{ __('Laporan Keuangan') }}
+                </x-nav-link>
                 <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                     {{ __('Users') }}
                 </x-responsive-nav-link>
+                
             @endif
             </div>
 

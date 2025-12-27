@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionController;
 
 
 // 1. Rute Publik (Landing Page)
@@ -58,6 +59,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('orders.export.excel');
 
     Route::get('/orders/export/csv', [App\Http\Controllers\OrderController::class, 'exportCsv'])->name('orders.export.csv');
+
+    Route::get('/finance', [TransactionController::class, 'index'])->name('finance.index');
+    Route::post('/finance/expense', [TransactionController::class, 'storeExpense'])->name('finance.store');
 });
 
 
