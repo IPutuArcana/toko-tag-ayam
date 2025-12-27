@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -150,20 +151,31 @@ class OrderController extends Controller
         return back()->with('success', "Status pesanan diubah ke '{$newStatus}'.");
     }
 
-    /**
-     * [ADMIN & USER] Tandai pesanan sebagai 'paid'
-     */
-    public function markAsPaid(Order $order)
+    // Example inside OrderController.php
+
+    public function markAsPaid(Request $request, $id)
     {
-        if ($order->status != 'completed') {
-            return back()->with('error', 'Pesanan hanya bisa ditandai lunas jika statusnya "Completed".');
+        $order = Order::findOrFail($id);
+        
+        // 1. Update Order Status
+        $order->status = 'paid';
+        $order->save();
+
+        // 2. RECORD THE FINANCIAL TRANSACTION (The Commercial Step)
+        // Check if transaction already exists to avoid duplicates
+        if (!$order->transaction) {
+            \App\Models\Transaction::create([
+                'type' => 'income', // Because it's a sale
+                'amount' => $order->total_price, // Assuming you have this field
+                'description' => 'Payment for Order #' . $order->id,
+                'order_id' => $order->id,
+                'transaction_date' => now(),
+            ]);
         }
 
-        $order->update(['status' => 'paid']);
-        return back()->with('success', 'Pesanan telah ditandai Lunas.');
+        return response()->json(['message' => 'Order Paid and Recorded in Ledger'], 200);
     }
-
-    // ... (fungsi markAsPaid() Anda ada di sini) ...
+     // ... (fungsi markAsPaid() Anda ada di sini) ...
 
     /**
      * Export data pesanan ke file CSV.

@@ -26,4 +26,10 @@ class Order extends Model
     public function items() {
         return $this->hasMany(OrderItem::class);
     }
+
+    public function transaction()
+    {
+        // One Order creates One Financial Entry
+        return $this->hasOne(Transaction::class);
+    }
 }
