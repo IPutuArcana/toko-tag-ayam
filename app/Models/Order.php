@@ -19,7 +19,7 @@ class Order extends Model
 
     // Relasi ke User (Kasir)
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
     // Relasi ke Item Pesanan

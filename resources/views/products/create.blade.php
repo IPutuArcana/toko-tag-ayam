@@ -62,7 +62,7 @@
                                 <textarea name="description" id="description" rows="3" class="block mt-1 w-full rounded-md shadow-sm border-gray-300">{{ old('description') }}</textarea>
                             </div>
 
-                            <div class="md:col-span-2">
+                            <!-- <div class="md:col-span-2">
                                 <h3 class="text-lg font-medium text-gray-900 mb-2">Resep (Bahan Baku yang Dibutuhkan)</h3>
                                 <div class="space-y-2">
                                     @forelse ($materials as $material)
@@ -80,7 +80,7 @@
                                         <p class="text-gray-500">Silakan tambahkan Bahan Baku terlebih dahulu.</p>
                                     @endforelse
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="flex items-center justify-end mt-6">

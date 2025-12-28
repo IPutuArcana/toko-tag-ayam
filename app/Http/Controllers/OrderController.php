@@ -50,11 +50,16 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        // PERBAIKAN 1: Validasi diubah
         $request->validate([
             'customer_name' => 'nullable|string|max:255',
             'items' => 'required|array|min:1',
             'items.*.product_id' => 'required|exists:products,id',
-            'items.*.quantity' => 'required|integer|min:1',
+            
+            // UBAH DARI 'min:1' MENJADI 'nullable|integer|min:0'
+            // Kita izinkan 0 agar item yang tidak dipilih tidak bikin error
+            'items.*.quantity' => 'nullable|integer|min:0', 
+            
             'items.*.custom_text' => 'nullable|string',
         ]);
 
@@ -63,7 +68,10 @@ class OrderController extends Controller
 
         // --- FASE 1: Validasi Stok & Hitung Harga ---
         foreach ($request->items as $item) {
+            // Logika ini sudah BENAR, dia akan menyaring item yang quantity-nya > 0
+            // Item dengan quantity 0 atau kosong akan diabaikan (skip)
             if (!empty($item['quantity']) && $item['quantity'] > 0) {
+                
                 $product = Product::findOrFail($item['product_id']);
 
                 if ($product->stock < $item['quantity']) {
@@ -77,22 +85,23 @@ class OrderController extends Controller
                     'product_id' => $product->id,
                     'quantity' => $item['quantity'],
                     'price_at_time_of_sale' => $product->selling_price,
-                    'custom_text' => $item['custom_text'],
+                    'custom_text' => $item['custom_text'] ?? null, // Pakai null coalescing operator biar aman
                 ];
             }
         }
 
+        // PERBAIKAN 2: Pastikan setelah disaring, ada minimal 1 barang yang valid
         if (empty($itemsData)) {
-            return back()->with('error', "Anda harus memesan minimal 1 item.")->withInput();
+            return back()->with('error', "Anda belum memilih produk satupun (Jumlah minimal 1).")->withInput();
         }
 
         // --- FASE 2: Simpan ke Database (Transaksi) ---
         try {
             DB::transaction(function () use ($request, $totalPrice, $itemsData) {
                 $order = Order::create([
-                    'user_id' => Auth::id(), // ID kasir yang login
+                    'user_id' => Auth::id(),
                     'customer_name' => $request->customer_name,
-                    'status' => 'pending', // Status awal
+                    'status' => 'pending',
                     'total_price' => $totalPrice,
                 ]);
 

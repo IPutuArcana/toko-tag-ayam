@@ -24,16 +24,12 @@
                         <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
                             {{ __('Kategori') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('materials.index')" :active="request()->routeIs('materials.*')">
-                            {{ __('Bahan Baku') }}
-                        </x-nav-link>
+                        
                         <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
                             {{-- INI LINK BARU ANDA --}}
                             {{ __('Produk') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('production.index')" :active="request()->routeIs('production.index')">
-                            {{ __('Produksi') }}
-                        </x-nav-link>
+                        
                         <x-nav-link :href="route('finance.index')" :active="request()->routeIs('finance.index')">
                             {{ __('Laporan Keuangan') }}
                         </x-nav-link>
@@ -102,16 +98,12 @@
                 <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
                     {{ __('Kategori') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('materials.index')" :active="request()->routeIs('materials.*')">
-                    {{ __('Bahan Baku') }}
-                </x-responsive-nav-link>
+                
                 <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
                     {{-- INI LINK BARU ANDA --}}
                     {{ __('Produk') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('production.index')" :active="request()->routeIs('production.index')">
-                    {{ __('Produksi') }}
-                </x-responsive-nav-link>
+                
                 <x-nav-link :href="route('finance.index')" :active="request()->routeIs('finance.index')">
                     {{ __('Laporan Keuangan') }}
                 </x-nav-link>

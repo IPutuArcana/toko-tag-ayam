@@ -3,9 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController; 
-use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -45,11 +43,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     
     // Ini adalah rute untuk CRUD Kategori
     Route::resource('/categories', CategoryController::class);
-    Route::resource('/materials', MaterialController::class);
     Route::resource('/products', ProductController::class);
-
-    Route::get('/production', [ProductionController::class, 'index'])->name('production.index'); // Menampilkan form
-    Route::post('/production', [ProductionController::class, 'store'])->name('production.store'); // Memproses form
 
     Route::resource('/users', UserController::class);
 

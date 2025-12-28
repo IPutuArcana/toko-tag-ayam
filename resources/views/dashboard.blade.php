@@ -27,14 +27,7 @@
                                 {{ $totalProductStock }}
                             </div>
                         </div>
-
-                        <div class="bg-red-100 border border-red-300 rounded-lg p-4 shadow-sm">
-                            <div class="text-sm font-medium text-red-800">Bahan Baku Menipis (<10)</div>
-                            <div class="text-3xl font-bold text-red-900 mt-1">
-                                {{ $lowStockMaterials }}
-                            </div>
-                        </div>
-
+                        
                     </div>
                     
                     <h3 class="text-lg font-medium mb-4">Aksi Cepat</h3>

@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Tambahkan logika ini:
         // Jika sedang pakai Ngrok (atau environment production), paksa HTTPS
-        if (config('app.env') === 'local' || config('app.env') === 'production') {
+        if (str_contains(request()->getHost(), 'ngrok-free.dev')) {
             URL::forceScheme('https');
         }
     }
